@@ -10,11 +10,13 @@ renderer.setClearColor(0xff0000, 0);
 sectionTag.appendChild(renderer.domElement);
 
 const clock = new THREE.Clock();
+const mouse = new THREE.Vector2(0, 0);
 const loader = new THREE.TextureLoader();
 const cubeLoader = new THREE.CubeTextureLoader();
 
 const uniforms = {
   time: {value: clock.getElapsedTime()},
+  mouse: {value: mouse},
   cube: {
     value: cubeLoader.load([
       './assets/shader-texture/foto/portrait/posx.jpg',
@@ -30,11 +32,11 @@ const uniforms = {
 // Setting up Shapes and Geometry
 
 const dpi = 64;
-// const geometry = new THREE.SphereGeometry(12, dpi, dpi);
+const geometry = new THREE.SphereGeometry(10, dpi, dpi);
 // const geometry = new THREE.TorusKnotGeometry(8, 1, 5 * dpi, dpi, 2, 5);
 // const geometry = new THREE.ConeGeometry(5, 20, 32);
 // const geometry = new THREE.TetrahedronGeometry(20, 1);
-const geometry = new THREE.PlaneGeometry(10, 10);
+// const geometry = new THREE.PlaneGeometry(10, 10);
 // const geometry = new THREE.PlaneGeometry(150, 15);
 // const geometry = new THREE.OctahedronGeometry(10, 0);
 
@@ -42,6 +44,7 @@ const material = new THREE.ShaderMaterial({
   uniforms: uniforms,
   vertexShader: vert,
   fragmentShader: frag,
+  // wireframe: true,
 });
 const shape = new THREE.Mesh(geometry, material);
 
@@ -50,13 +53,18 @@ scene.add(shape);
 let aimCamera = new THREE.Vector3(0, 0, 35);
 let currentCamera = new THREE.Vector3(0, 100, 100);
 
+let currentX = 0;
+let currentY = 0;
+let aimX = 0;
+let aimY = 0;
+
 camera.position.copy(aimCamera);
 
 // Adding an GLTFL Loader
 
 // const gltfloader = new THREE.GLTFLoader();
 
-// gltfloader.load('./assets/desktop.gltf', function (gltf) {
+// gltfloader.load('./assets/untitled.gltf', function (gltf) {
 //   gltf.scene.traverse(function (child) {
 //     if (child.isMesh) {
 //       child.material = new THREE.ShaderMaterial({
@@ -73,16 +81,22 @@ camera.position.copy(aimCamera);
 const animate = function () {
   requestAnimationFrame(animate);
 
-  //camera zoom
+  // camera zoom
   const diff = aimCamera.clone().sub(currentCamera).multiplyScalar(0.01);
   currentCamera.add(diff);
   camera.position.copy(currentCamera);
 
   // update uniforms
   uniforms.time = {value: clock.getElapsedTime()};
+  uniforms.mouse = {value: mouse};
 
   renderer.render(scene, camera);
 };
+
+sectionTag.addEventListener('mousemove', function (event) {
+  mouse.x = (event.clientX / sectionTag.clientWidth) * 2 - 0.5;
+  mouse.y = (event.clientY / sectionTag.clientHeight) * 2 - 0.5;
+});
 
 animate();
 

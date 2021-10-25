@@ -4,6 +4,7 @@ const frag = `
   uniform float time;
   uniform sampler2D cat;
   uniform samplerCube cube;
+  uniform vec2 mouse;
 
   varying vec3 v_position;
   varying vec3 v_normal;
@@ -42,14 +43,14 @@ const frag = `
     // water reflection
 
 		vec3 wind = vec3(
-			mix(-2.5, 2.5, fbm(0.1 * v_position + 0.1 * time)),
-			mix(-2.5, 2.5, fbm(0.2 * v_position - 0.2 * time)),
-			mix(-2.5, 2.5, fbm(0.3 * v_position + 0.3 * time))
+			mix(-2.5, 2.5, fbm(mouse.x * v_position + 0.1 * time)),
+			mix(-2.5, 2.5, fbm(mouse.y * v_position - 0.2 * time)),
+			mix(-2.5, 2.5, fbm(mouse.x * v_position + 0.3 * time))
 		);
 
     // oil spill — rainbow colors
 
-		float thickness = mix(-0.5, 0.5, fbm(0.5 * v_position + wind));
+		float thickness = mix(-0.5, 0.5, fbm(0.9 * v_position + wind));
 
     //rainbow color
 		vec3 rr = refract(cameraDirection, v_normal, 0.5 + thickness);
@@ -60,7 +61,7 @@ const frag = `
 		vec4 gSample = textureCube(cube, rg);
 		vec4 bSample = textureCube(cube, rb);
 
-		vec4 objectColor = vec4(rSample.r, gSample.g, bSample.b, 0.1);
+		vec4 objectColor = vec4(rSample.r, gSample.g, bSample.b, 0.5);
 
 
     //mixing and adding colors

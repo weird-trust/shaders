@@ -3,6 +3,7 @@ const vert = `
  ${includes}
 
  uniform float time;
+ uniform vec2 mouse;
 
   varying vec3 v_position;
   varying vec3 v_normal;
@@ -10,6 +11,8 @@ const vert = `
 
   void main () {
     vec3 newPosition = position;
+
+    float noise = fbm(0.01*position*time);
 
     mat3 r = rotation3dZ(0.1 * time);
     r *= rotation3dY(1.1 * sin(time *0.025));
