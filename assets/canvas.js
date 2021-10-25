@@ -34,9 +34,9 @@ const dpi = 64;
 // const geometry = new THREE.TorusKnotGeometry(8, 1, 5 * dpi, dpi, 2, 5);
 // const geometry = new THREE.ConeGeometry(5, 20, 32);
 // const geometry = new THREE.TetrahedronGeometry(20, 1);
-// const geometry = new THREE.PlaneGeometry(150, 10);
-// const geometry = new THREE.PlaneGeometry(15, 15);
-const geometry = new THREE.OctahedronGeometry(10, 0);
+const geometry = new THREE.PlaneGeometry(10, 10);
+// const geometry = new THREE.PlaneGeometry(150, 15);
+// const geometry = new THREE.OctahedronGeometry(10, 0);
 
 const material = new THREE.ShaderMaterial({
   uniforms: uniforms,
@@ -54,21 +54,21 @@ camera.position.copy(aimCamera);
 
 // Adding an GLTFL Loader
 
-const gltfloader = new THREE.GLTFLoader();
+// const gltfloader = new THREE.GLTFLoader();
 
-gltfloader.load('./assets/untitled.gltf', function (gltf) {
-  gltf.scene.traverse(function (child) {
-    if (child.isMesh) {
-      child.material = new THREE.ShaderMaterial({
-        uniforms: uniforms,
-        vertexShader: vert,
-        fragmentShader: frag,
-      });
-    }
-  });
+// gltfloader.load('./assets/desktop.gltf', function (gltf) {
+//   gltf.scene.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.material = new THREE.ShaderMaterial({
+//         uniforms: uniforms,
+//         vertexShader: vert,
+//         fragmentShader: frag,
+//       });
+//     }
+//   });
 
-  scene.add(gltf.scene);
-});
+//   scene.add(gltf.scene);
+// });
 
 const animate = function () {
   requestAnimationFrame(animate);
