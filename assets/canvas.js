@@ -19,26 +19,26 @@ const uniforms = {
   mouse: {value: mouse},
   cube: {
     value: cubeLoader.load([
-      './assets/shader-texture/marble/black/posx.jpg',
-      './assets/shader-texture/marble/black/negx.jpg',
-      './assets/shader-texture/marble/black/posy.jpg',
-      './assets/shader-texture/marble/black/negy.jpg',
-      './assets/shader-texture/marble/black/posz.jpg',
-      './assets/shader-texture/marble/black/negz.jpg',
+      './assets/shader-texture/foto/portrait/posx.jpg',
+      './assets/shader-texture/foto/portrait/negx.jpg',
+      './assets/shader-texture/foto/portrait/posy.jpg',
+      './assets/shader-texture/foto/portrait/negy.jpg',
+      './assets/shader-texture/foto/portrait/posz.jpg',
+      './assets/shader-texture/foto/portrait/negz.jpg',
     ]),
   },
 };
 
 // Setting up Shapes and Geometry
 
-// const dpi = 64;
-// const geometry = new THREE.SphereGeometry(10, dpi, dpi);
+const dpi = 64;
+const geometry = new THREE.SphereGeometry(10, dpi, dpi);
 // const geometry = new THREE.TorusKnotGeometry(8, 1, 5 * dpi, dpi, 2, 5);
 // const geometry = new THREE.ConeGeometry(5, 20, 32);
 // const geometry = new THREE.TetrahedronGeometry(20, 1);
 // const geometry = new THREE.PlaneGeometry(10, 10);
 // const geometry = new THREE.PlaneGeometry(150, 15);
-const geometry = new THREE.OctahedronGeometry(10, 0);
+// const geometry = new THREE.OctahedronGeometry(10, 0);
 
 const material = new THREE.ShaderMaterial({
   uniforms: uniforms,
@@ -62,21 +62,21 @@ camera.position.copy(aimCamera);
 
 // Adding an GLTFL Loader
 
-const gltfloader = new THREE.GLTFLoader();
+// const gltfloader = new THREE.GLTFLoader();
 
-gltfloader.load('./assets/untitled.gltf', function (gltf) {
-  gltf.scene.traverse(function (child) {
-    if (child.isMesh) {
-      child.material = new THREE.ShaderMaterial({
-        uniforms: uniforms,
-        vertexShader: vert,
-        fragmentShader: frag,
-      });
-    }
-  });
+// gltfloader.load('./assets/untitled.gltf', function (gltf) {
+//   gltf.scene.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.material = new THREE.ShaderMaterial({
+//         uniforms: uniforms,
+//         vertexShader: vert,
+//         fragmentShader: frag,
+//       });
+//     }
+//   });
 
-  scene.add(gltf.scene);
-});
+//   scene.add(gltf.scene);
+// });
 
 const animate = function () {
   requestAnimationFrame(animate);
@@ -107,25 +107,33 @@ window.addEventListener('resize', function () {
 });
 
 // White Marble
-// './src/assets/shader-texture/marble/white/posx.jpg',
-// './src/assets/shader-texture/marble/white/negx.jpg',
-// './src/assets/shader-texture/marble/white/posy.jpg',
-// './src/assets/shader-texture/marble/white/negy.jpg',
-// './src/assets/shader-texture/marble/white/posz.jpg',
-// './src/assets/shader-texture/marble/white/negz.jpg',
+// './assets/shader-texture/marble/white/posx.jpg',
+// './assets/shader-texture/marble/white/negx.jpg',
+// './assets/shader-texture/marble/white/posy.jpg',
+// './assets/shader-texture/marble/white/negy.jpg',
+// './assets/shader-texture/marble/white/posz.jpg',
+// './assets/shader-texture/marble/white/negz.jpg',
 
 // Black Marble
-// './src/assets/shader-texture/marble/black/posx.jpg',
-// './src/assets/shader-texture/marble/black/negx.jpg',
-// './src/assets/shader-texture/marble/black/posy.jpg',
-// './src/assets/shader-texture/marble/black/negy.jpg',
-// './src/assets/shader-texture/marble/black/posz.jpg',
-// './src/assets/shader-texture/marble/black/negz.jpg',
+// './assets/shader-texture/marble/black/posx.jpg',
+// './assets/shader-texture/marble/black/negx.jpg',
+// './assets/shader-texture/marble/black/posy.jpg',
+// './assets/shader-texture/marble/black/negy.jpg',
+// './assets/shader-texture/marble/black/posz.jpg',
+// './assets/shader-texture/marble/black/negz.jpg',
 
 // Foto/Portrait
-// './src/assets/shader-texture/foto/portrait/posx.jpg',
-// './src/assets/shader-texture/foto/portrait/negx.jpg',
-// './src/assets/shader-texture/foto/portrait/posy.jpg',
-// './src/assets/shader-texture/foto/portrait/negy.jpg',
-// './src/assets/shader-texture/foto/portrait/posz.jpg',
-// './src/assets/shader-texture/foto/portrait/negz.jpg',
+// './assets/shader-texture/foto/portrait/posx.jpg',
+// './assets/shader-texture/foto/portrait/negx.jpg',
+// './assets/shader-texture/foto/portrait/posy.jpg',
+// './assets/shader-texture/foto/portrait/negy.jpg',
+// './assets/shader-texture/foto/portrait/posz.jpg',
+// './assets/shader-texture/foto/portrait/negz.jpg',
+
+// Holo
+// './assets/shader-texture/holo/posx.jpg',
+// './assets/shader-texture/holo/negx.jpg',
+// './assets/shader-texture/holo/posy.jpg',
+// './assets/shader-texture/holo/negy.jpg',
+// './assets/shader-texture/holo/posz.jpg',
+// './assets/shader-texture/holo/negz.jpg',
